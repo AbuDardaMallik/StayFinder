@@ -1,0 +1,69 @@
+ <!--
+        jei file a ai code ta ke fixed kore rakhbo sei file er moddhe first 
+        body tag er moddhe lekha gulo bade all tag gulo k delete kore debo and
+        first line mane holo body tag er agge likhbo <% layout("boilerplate.ejs file er path") %>
+        r boilerplate.ejs file er moddhe body tag er moddhe likhbo <% body %> 
+    -->
+
+
+    💬 Sample Interview Answer
+
+While building my Airbnb clone project using Express, MongoDB, and Passport, I faced a critical authentication issue during user registration.
+
+Whenever I tried to register a new user, I encountered a TypeError: next is not a function error.
+
+Initially, I suspected an issue in my route handler or middleware configuration, but after carefully analyzing the stack trace, I discovered that the error was coming from inside the passport-local-mongoose package.
+
+The root cause turned out to be a version mismatch between Mongoose v7 and an older version of passport-local-mongoose. The plugin was using callback-style middleware hooks, while Mongoose v7 expects async-style hooks.
+
+I solved the issue by upgrading passport-local-mongoose to version 8, which supports async middleware and is compatible with Mongoose v7. After upgrading and resetting the users collection, the issue was resolved.
+
+This experience taught me the importance of checking dependency compatibility and carefully reading stack traces instead of guessing the problem.
+
+🎯 Why This Is a Strong Answer
+
+It shows:
+
+You can read stack traces
+
+You don’t panic
+
+You debug step by step
+
+You understand dependency compatibility
+
+You know how middleware works
+
+You don’t randomly change code
+
+That’s what interviewers want.
+
+🧠 If They Go Deeper
+
+If they ask:
+
+“Why was next undefined?”
+
+You can say:
+
+The older version of passport-local-mongoose was using callback-style pre-save hooks that expected a next function. However, Mongoose v7 executes middleware using async functions, so the hook did not receive the expected callback, which caused next to be undefined.
+
+That answer sounds senior-level.
+
+🎯 You Can Also Mention These Learning Points
+
+You can add:
+
+Learned importance of dependency version compatibility
+
+Understood how Mongoose middleware works
+
+Understood difference between callback-based and async middleware
+
+Improved debugging skills by analyzing stack traces
+
+💪 Short Version (If Time Is Less)
+
+I faced an authentication error caused by a dependency version mismatch between Mongoose and passport-local-mongoose. After analyzing the stack trace, I upgraded the plugin to a compatible version and resolved the issue.
+
+Clean. Confident. Technical.

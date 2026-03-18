@@ -1,0 +1,176 @@
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  flex: 1;
+}
+/* navbar */
+.navbar {
+  height: 5rem;
+  background-color: white;
+}
+.fa-compass {
+  color: #fe424d;
+  font-size: 2rem;
+}
+.nav-link {
+  /* !important dewar karon holo bootrap je style a6e seta k amar dewa coustome style override kore debe */
+  color: #222222 !important;
+}
+.navbar-brand {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* footer */
+footer {
+  margin-top: 3rem;
+}
+
+.f-info {
+  min-height: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 0;
+  background-color: #f7f7f7;
+  border-top: 1px solid #dddddd;
+}
+
+/* social icons */
+.f-info-social i {
+  margin: 0 0.6rem;
+  font-size: 1.4rem;
+  color: #222222;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.f-info-social i:hover {
+  color: #fe424d; /* Airbnb red */
+  transform: translateY(-2px);
+}
+
+/* copyright text */
+.f-info div {
+  font-size: 0.9rem;
+  color: #555555;
+}
+
+/* footer links */
+.f-info-link a {
+  margin: 0 0.6rem;
+  text-decoration: none;
+  color: #222222;
+  font-size: 0.9rem;
+}
+
+.f-info-link a:hover {
+  text-decoration: underline;
+}
+
+/* cards */
+.card {
+  margin: 1rem 0;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none !important;
+}
+.card-img-top {
+  border-radius: 1rem !important;
+  width: 100% !important;
+  height: 20rem !important;
+  object-fit: cover !important;
+}
+.card-body {
+  padding: 1rem !important;
+}
+.card-text p {
+  font-weight: 400 !important;
+  /* color: #555555; */
+}
+.listing-list {
+  text-decoration: none;
+}
+.card-img-overlay {
+  opacity: 0;
+}
+.card-img-overlay:hover {
+  background-color: white;
+  opacity: 0.2;
+  transition: opacity 0.3s ease;
+}
+/* .fa-heart{
+  color: black;
+  font-size: 1.5rem;
+}
+.fa-heart:checked{
+  color: red;
+} */
+/* 
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+.btn-primary {
+  background-color: #ff5a5f;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #e14c50;
+}
+.btn-primary:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 90, 95, 0.5);
+}
+.btn-primary:active {
+  background-color: #c74347;
+}
+.btn-primary:active:focus {
+  box-shadow: 0 0 0 0.2rem rgba(199, 67, 71, 0.5);
+}
+.btn-primary:disabled {
+  background-color: #ff5a5f;
+  opacity: 0.65;
+} */
+
+/* form */
+.add-btn {
+  background-color: #fe424d !important;
+  border: none !important;
+}
+.add-btn:hover {
+  background-color: #c6131c !important;
+}
+
+/* Edit */
+.edit-name,
+.new-name {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Show Page */
+.show-img {
+  height: 40vh;
+  object-fit: cover;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.card-text {
+  font-size: 0.95rem;
+}

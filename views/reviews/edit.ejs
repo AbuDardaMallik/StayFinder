@@ -1,0 +1,73 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row mt-4">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="mb-4 text-center">
+          Edit Your Review for <%= listing.title %>
+        </h3>
+
+        <form
+          action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=PUT"
+          method="POST"
+          novalidate
+          class="needs-validation"
+        >
+          <!-- Rating -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Rating</label>
+            <select name="rating" class="form-select" required>
+              <option value="">Select rating</option>
+              <option value="1" <%= review.rating == 1 ? 'selected' : '' %>>
+                ⭐ 1 - Very Bad
+              </option>
+              <option value="2" <%= review.rating == 2 ? 'selected' : '' %>>
+                ⭐ 2 - Bad
+              </option>
+              <option value="3" <%= review.rating == 3 ? 'selected' : '' %>>
+                ⭐ 3 - Average
+              </option>
+              <option value="4" <%= review.rating == 4 ? 'selected' : '' %>>
+                ⭐ 4 - Good
+              </option>
+              <option value="5" <%= review.rating == 5 ? 'selected' : '' %>>
+                ⭐ 5 - Excellent
+              </option>
+            </select>
+            <div class="invalid-feedback">Please provide a rating.</div>
+          </div>
+
+          <!-- Comment -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Comment</label>
+            <textarea
+              name="comment"
+              class="form-control"
+              rows="4"
+              required
+            ><%= review.comment %></textarea>
+            <div class="invalid-feedback">
+              Please provide a comment.
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="d-flex justify-content-between">
+            <a
+              href="/listings/<%= listing._id %>"
+              class="btn btn-outline-secondary"
+            >
+              Cancel
+            </a>
+            <button class="btn btn-primary">
+              Update Review
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
