@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const app = express(); // Create an Express application
-const port = 8080;
+const port = process.env.PORT || 8080;
 const mongoose = require("mongoose"); // Import mongoose
 const path = require("path"); // ai path ta require korar karon holo views folder ar public folder er path set korar jonno
 const methodOverride = require("method-override"); // to use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
