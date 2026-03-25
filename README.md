@@ -7,7 +7,6 @@ It allows users to explore listings, create and manage properties, upload images
 
 ![Node.js](https://img.shields.io/badge/Node.js-Backend-green)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Database-green)
-![Socket.io](https://img.shields.io/badge/Socket.io-Realtime-black)
 ![License](https://img.shields.io/badge/License-ISC-blue)
 
 ---
