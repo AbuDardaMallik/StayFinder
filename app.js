@@ -93,7 +93,6 @@ app.use((req, res, next) => {
 app.use("/listings", listingsRoutes); // Use listing routes
 app.use("/listings/:id/reviews", reviewsRoutes); // Use reviews routes
 app.use("/", userRoutes); // Use user routes
-// search route to handle search queries for listings based on location and price range
 
 app.get("/", (req, res) => {
   res.redirect("/listings");
