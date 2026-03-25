@@ -96,7 +96,7 @@ app.use("/", userRoutes); // Use user routes
 // search route to handle search queries for listings based on location and price range
 
 app.get("/", (req, res) => {
-  res.send("Home Page");
+  res.redirect("/listings");
 });
 
 // 404 handler
