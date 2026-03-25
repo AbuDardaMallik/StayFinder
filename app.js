@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const app = express(); // Create an Express application
 const port = 8080;
@@ -7,6 +11,7 @@ const methodOverride = require("method-override"); // to use HTTP verbs such as 
 const ejsMate = require("ejs-mate"); // to use ejs-mate for layout support. eta use kora hoy jate amra ejs template gulo te layout use korte pari, ja code reusability baray.
 const ExpressError = require("./utils/ExpressError"); // Import the custom ExpressError class
 const session = require("express-session"); // to use express-session for session management
+const MongoStore = require("connect-mongo").default; // to use connect-mongo for storing session data in MongoDB
 const flash = require("connect-flash"); // to use connect-flash for flash messages
 const passport = require("passport"); // to use passport for authentication
 // const LocalStrategy = require("passport-local"); // to use passport-local for local authentication strategy
@@ -23,21 +28,39 @@ app.use(express.static(path.join(__dirname, "public"))); // ai line ta public fo
 app.use(express.urlencoded({ extended: true })); // to parse form data
 app.use(methodOverride("_method")); // to use method-override
 
+// app.get("/favicon.ico", (req, res) => res.sendStatus(204));
+
+mongoose.set("strictQuery", true);
+
 // app.use(express.json());
 
 // Connect to MongoDB
+const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/StayFinder";
 main()
   .then(() => console.log("MongoDB connection established"))
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/airbnbDatabase");
+  await mongoose.connect(dbUrl);
   console.log("Connected to MongoDB");
 }
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl, // MongoDB connection URL for storing session data
+  crypto: {
+    secret: process.env.SECRET, // a secret key for encrypting session data in the database. eta should be a long, random string in production for security purposes.
+  },
+  touchAfter: 24 * 60 * 60, // time period in seconds after which the session will be updated in the database, even if it hasn't been modified. eta use kora hoy jate unnecessary database writes na hoy.
+});
+
+store.on("error", (err) => {
+  console.log("Session Store Error:", err);
+}); // Event listener to log any errors that occur with the session store
+
 // Session configuration
 const sessionOptions = {
-  secret: "thisshouldbeabettersecret!", // a secret key for signing the session ID cookie. eta should be a long, random string in production for security purposes.
+  store: store, // Use the MongoDB session store
+  secret: process.env.SECRET, // a secret key for signing the session ID cookie. eta should be a long, random string in production for security purposes.
   resave: false, // forces the session to be saved back to the session store, even if it was never modified during the request. eta false rakha hoy jate unnecessary session saves na hoy.
   saveUninitialized: true, // forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified. eta true rakha hoy jate new sessions are saved to the store, even if they haven't been modified.
   cookie: {
@@ -70,6 +93,7 @@ app.use((req, res, next) => {
 app.use("/listings", listingsRoutes); // Use listing routes
 app.use("/listings/:id/reviews", reviewsRoutes); // Use reviews routes
 app.use("/", userRoutes); // Use user routes
+// search route to handle search queries for listings based on location and price range
 
 app.get("/", (req, res) => {
   res.send("Home Page");
@@ -82,9 +106,11 @@ app.all(/.*/, (req, res, next) => {
 
 // error middleware
 app.use((err, req, res, next) => {
+  if (err.statusCode !== 404) {
+    console.log(err);
+  }
   const { status = 500, message = "Something went wrong" } = err;
-  res.render("error.ejs", { err });
-
+  res.status(status).render("error.ejs", { err });
   // Alternatively, you can send a simple response
   // res.status(status).send(message);
 });

@@ -23,6 +23,17 @@ router.post(
   wrapAsync(reviewController.createNewReview),
 );
 
+// Update and Delete Review Routes
+router
+  .route("/:reviewId")
+  .put(
+    isLoggedIn,
+    isOwnerReview,
+    validateReview,
+    wrapAsync(reviewController.updateReview),
+  )
+  .delete(isLoggedIn, isOwnerReview, wrapAsync(reviewController.destroyReview));
+
 // Edit Review Route
 router.get(
   "/:reviewId/edit",
@@ -31,22 +42,22 @@ router.get(
   wrapAsync(reviewController.renderEditReviewForm),
 );
 
-// Update Review Route
-router.put(
-  "/:reviewId",
-  isLoggedIn,
-  isOwnerReview,
-  validateReview,
-  wrapAsync(reviewController.updateReview),
-);
+// // Update Review Route
+// router.put(
+//   "/:reviewId",
+//   isLoggedIn,
+//   isOwnerReview,
+//   validateReview,
+//   wrapAsync(reviewController.updateReview),
+// );
 
-// Delete Review Route
-// Ai delete route er boutton ta amra review edit page e dibo
-router.delete(
-  "/:reviewId",
-  isLoggedIn,
-  isOwnerReview,
-  wrapAsync(reviewController.destroyReview),
-);
+// // Delete Review Route
+// // Ai delete route er boutton ta amra review edit page e dibo
+// router.delete(
+//   "/:reviewId",
+//   isLoggedIn,
+//   isOwnerReview,
+//   wrapAsync(reviewController.destroyReview),
+// );
 
 module.exports = router;

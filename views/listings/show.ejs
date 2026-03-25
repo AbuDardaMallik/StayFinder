@@ -6,7 +6,7 @@
     <div class="card shadow-sm">
       <h3><%= listing.title %></h3>
       <img
-        src="<%= listing.image %>"
+        src="<%= listing.image.url %>"
         class="card-img-top show-img"
         alt="Listing Image"
       />
@@ -14,7 +14,9 @@
       <div class="card-body">
         <!-- <h4 class="card-title mb-2"><%= listing.title %></h4> -->
 
-        <p class="card-text text-muted mb-3">Owned By: <i><%= listing.owner.username %></i></p>
+        <p class="card-text text-muted mb-3">Owned By: <i><%= listing.owner?.username || "Unknown" %></i></p>
+
+
 
         <p class="card-text text-muted mb-3"><%= listing.description %></p>
 
@@ -32,8 +34,8 @@
     </div>
 
     <!-- action buttons -->
-    <% if(currentUser && currentUser._id.equals(listing.owner._id)) { %>
-    <div class="d-flex gap-3 mt-3">
+<% if(currentUser && listing.owner && currentUser._id.equals(listing.owner._id)) { %>
+      <div class="d-flex gap-3 mt-3">
       <a href="/listings/<%= listing._id %>/edit" class="btn btn-outline-dark">
         Edit
       </a>
@@ -107,6 +109,12 @@
                   ☆
                 <% } %>
               </div>
+
+            <!-- for checking the rating from github -->
+<!--           
+          <p class="starability-result" data-rating="<%= review.rating %>">
+            
+          </p> -->
 
                          <!-- Comment -->
               <p class="mt-2 text-secondary">

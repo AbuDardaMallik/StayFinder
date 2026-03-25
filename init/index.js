@@ -8,7 +8,7 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/airbnbDatabase");
+  await mongoose.connect("mongodb://127.0.0.1:27017/StayFinder");
   console.log("Connected to MongoDB");
 }
 

@@ -174,3 +174,26 @@ footer {
 .card-text {
   font-size: 0.95rem;
 }
+
+/* Search Button */
+.navbar .search-btn {
+  background-color: #ff385c;
+  color: white;
+  border-radius: 25px;
+  padding: 0 1rem 0 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.navbar .search-btn:hover {
+  background-color: #ff385c;
+  color: white;
+}
+
+.navbar .search-inp {
+  border: 1px solid #dddddd;
+  border-radius: 25px;
+  padding: 0.5rem 3rem 0.5rem 3rem;
+}
